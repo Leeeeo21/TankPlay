@@ -15,7 +15,7 @@ class TankClientFrame extends Frame{
     TankClientFrame() throws HeadlessException {
         super("TankPlay");
         this.setBounds(400,300,800,600);
-        this.setBackground(Color.white);
+        this.setBackground(Color.green);
         this.setVisible(true);
         this.setResizable(false);
         this.addWindowListener(new WindowAdapter() {
@@ -25,6 +25,20 @@ class TankClientFrame extends Frame{
                 System.exit(0);
             }
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param g
+     * @since 1.7
+     */
+    @Override
+    public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.RED);
+        g.fillOval(50,50,30,30);
+        g.setColor(c);
     }
 }
 
