@@ -12,9 +12,12 @@ class TankClientFrame extends Frame{
 
     TankClientFrame() throws HeadlessException {
         super("TankPlay");
-        Frame frame = new Frame();
-        frame.setBounds(400,300,800,600);
-        frame.setBackground(Color.white);
-        frame.setVisible(true);
+        this.setBounds(400,300,800,600);
+        this.setBackground(Color.white);
+        this.setVisible(true);
+        this.setResizable(false);
+
     }
 }
+
+
