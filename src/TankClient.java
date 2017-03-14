@@ -13,6 +13,7 @@ public class TankClient {
 class TankClientFrame extends Frame{
 
     public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
+    public static final Color BACK_GOUND_COLOR = new Color(0,225,0);
 
     Tank myTank = new Tank(50,50);
 
@@ -21,7 +22,7 @@ class TankClientFrame extends Frame{
     TankClientFrame() throws HeadlessException {
         super("TankPlay");
         this.setBounds(400,300,TANK_WIDTH,TANK_HEIGTHT);
-        this.setBackground(Color.green);
+        this.setBackground(BACK_GOUND_COLOR);
         this.setVisible(true);
         this.setResizable(false);
         this.addWindowListener(new WindowAdapter() {
@@ -51,7 +52,7 @@ class TankClientFrame extends Frame{
        }
        Graphics gOffScreen = offScreenImage.getGraphics();
        Color c = gOffScreen.getColor();
-       gOffScreen.setColor(Color.GREEN);
+       gOffScreen.setColor(BACK_GOUND_COLOR);
        gOffScreen.fillRect(0,0,TANK_WIDTH,TANK_HEIGTHT);
        gOffScreen.setColor(c);
        paint(gOffScreen);
@@ -80,6 +81,14 @@ class TankClientFrame extends Frame{
         public void keyPressed(KeyEvent e) {
             myTank.keyPressed(e);
         }
+
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            myTank.keyReleased(e);
+        }
+
+
     }
 
 }
