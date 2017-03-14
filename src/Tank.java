@@ -9,7 +9,7 @@ public class Tank {
 
 
     enum Direction{U,RU,R,RD,D,LD,L,LU,STOP}
-    Direction dir = Direction.STOP;
+    private Direction dir = Direction.STOP;
     public Tank(int x, int y) {
         this.x = x;
         this.y = y;

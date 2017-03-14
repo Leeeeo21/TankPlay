@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 public class TankClient {
     public static void main(String[] args) {
         TankClientFrame t = new TankClientFrame();
+
     }
 }
 class TankClientFrame extends Frame{
@@ -16,6 +17,7 @@ class TankClientFrame extends Frame{
     public static final Color BACK_GOUND_COLOR = new Color(0,225,0);
 
     Tank myTank = new Tank(50,50);
+    Missile m = new Missile(50,50,Tank.Direction.R);
 
     private Image offScreenImage = null;
 
@@ -42,6 +44,7 @@ class TankClientFrame extends Frame{
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
+        m.draw(g);
     }
 
 
