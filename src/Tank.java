@@ -3,16 +3,23 @@ import java.awt.event.KeyEvent;
 
 public class Tank {
     int x,y;
+    TankClientFrame t = null;
     public static final double XSPEED = 5.0,YSPEED = 5.0;
     private boolean bU =false,bR =false,bD =false,bL =false;
-
+    Direction dirM = Direction.LU;
 
 
     enum Direction{U,RU,R,RD,D,LD,L,LU,STOP}
     private Direction dir = Direction.STOP;
-    public Tank(int x, int y) {
+
+    public Tank(int x, int y ) {
         this.x = x;
         this.y = y;
+    }
+    public Tank(int x, int y ,TankClientFrame t) {
+        this.x = x;
+        this.y = y;
+        this.t = t;
     }
 
     public void draw(Graphics g) {
@@ -80,7 +87,7 @@ public class Tank {
 
 
 
-    void locateDirection() {
+    private void locateDirection() {
         if(bL && !bU && !bR && !bD) dir = Direction.L;
         else if(bL && bU && !bR && !bD) dir = Direction.LU;
         else if(!bL && bU && !bR && !bD) dir = Direction.U;
@@ -95,6 +102,9 @@ public class Tank {
     public void keyReleased(KeyEvent e) {
         int keycode = e.getKeyCode();
         switch (keycode) {
+            case KeyEvent.VK_SPACE:
+                t.m = fire();
+                break;
             case KeyEvent.VK_LEFT :
                 bL = false;
                 break;
@@ -111,4 +121,16 @@ public class Tank {
         locateDirection();
     }
 
+    public Missile fire(){
+        Missile m = null;
+        if (dirM == Direction.STOP) {
+            m = new Missile(x,y,dir);}
+
+
+        if(dir != Direction.STOP){
+            m = new Missile(x,y,dir);
+            dirM = dir;}
+
+            return m;
+    }
 }
