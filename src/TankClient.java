@@ -2,10 +2,6 @@
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-//import java.awt.event.WindowListener;
-
 
 public class TankClient {
     public static void main(String[] args) {
@@ -14,14 +10,14 @@ public class TankClient {
 }
 class TankClientFrame extends Frame{
 
-
+    public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
     private int x = 50,y = 50;
 
     private Image offScreenImage = null;
 
     TankClientFrame() throws HeadlessException {
         super("TankPlay");
-        this.setBounds(400,300,800,600);
+        this.setBounds(400,300,TANK_WIDTH,TANK_HEIGTHT);
         this.setBackground(Color.green);
         this.setVisible(true);
         this.setResizable(false);
@@ -59,12 +55,12 @@ class TankClientFrame extends Frame{
     @Override
     public void update(Graphics g) {
        if(offScreenImage == null){
-           offScreenImage = this.createImage(800,600);
+           offScreenImage = this.createImage(TANK_WIDTH,TANK_HEIGTHT);
        }
        Graphics gOffScreen = offScreenImage.getGraphics();
        Color c = gOffScreen.getColor();
        gOffScreen.setColor(Color.GREEN);
-       gOffScreen.fillRect(0,0,800,600);
+       gOffScreen.fillRect(0,0,TANK_WIDTH,TANK_HEIGTHT);
        gOffScreen.setColor(c);
        paint(gOffScreen);
        g.drawImage(offScreenImage,0,0,null);
@@ -78,7 +74,7 @@ class TankClientFrame extends Frame{
             while(true){
                 repaint();
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
