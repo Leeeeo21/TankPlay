@@ -13,7 +13,8 @@ public class TankClient {
 class TankClientFrame extends Frame{
 
     public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
-    private int x = 50,y = 50;
+
+    Tank myTank = new Tank(50,50);
 
     private Image offScreenImage = null;
 
@@ -39,13 +40,7 @@ class TankClientFrame extends Frame{
 
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x,y,30,30);
-
-        g.setColor(c);
-
-
+        myTank.draw(g);
     }
 
 
@@ -83,38 +78,7 @@ class TankClientFrame extends Frame{
 
         @Override
         public void keyPressed(KeyEvent e) {
-            int keycode = e.getKeyCode();
-            switch(keycode){
-                case KeyEvent.VK_UP:
-                    y -= 5;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    y += 5;
-                    break;
-                case KeyEvent.VK_LEFT:
-                    x -= 5;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    x += 5;
-                    break;
-            }
-            /*if(keycode == KeyEvent.VK_UP){
-                System.out.println("you pressed UP");
-                y -= 5;
-            }
-            if(keycode == KeyEvent.VK_DOWN){
-                System.out.println("you pressed UP");
-                y += 5;
-            }
-            if(keycode == KeyEvent.VK_LEFT){
-                System.out.println("you pressed UP");
-                x -= 5;
-            }
-            if(keycode == KeyEvent.VK_RIGHT){
-                System.out.println("you pressed UP");
-                x +=5;
-            }*/
-
+            myTank.keyPressed(e);
         }
     }
 
