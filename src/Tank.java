@@ -7,7 +7,7 @@ public class Tank {
     public static final double XSPEED = 5.0,YSPEED = 5.0;
     public static final int TWidth=30,THeight=30;
     private boolean bU =false,bR =false,bD =false,bL =false;
-    Direction dirPT = Direction.LU;
+    Direction dirPT = Direction.U;
 
 
     enum Direction{U,RU,R,RD,D,LD,L,LU,STOP}
@@ -101,6 +101,7 @@ public class Tank {
     public void keyPressed (KeyEvent e) {
         int keycode = e.getKeyCode();
         switch (keycode) {
+
             case KeyEvent.VK_LEFT :
                 bL = true;
                 break;
@@ -135,7 +136,7 @@ public class Tank {
         int keycode = e.getKeyCode();
         switch (keycode) {
             case KeyEvent.VK_SPACE:
-                t.m = fire();
+                    t.missiles.add(fire());
                 break;
             case KeyEvent.VK_LEFT :
                 bL = false;
@@ -154,8 +155,7 @@ public class Tank {
     }
 
     public Missile fire(){
-        Missile m = null;
-            m = new Missile(x,y,dirPT);
+        Missile m = new Missile(x,y,dirPT);
             return m;
     }
 }

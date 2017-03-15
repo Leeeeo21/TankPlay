@@ -4,11 +4,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TankClient {
     public static void main(String[] args) {
         TankClientFrame t = new TankClientFrame();
-
     }
 }
 class TankClientFrame extends Frame{
@@ -16,8 +17,10 @@ class TankClientFrame extends Frame{
     public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
     public static final Color BACK_GOUND_COLOR = new Color(0,225,0);
 
-    Tank myTank = new Tank(50,50,this);//难点！！！！！！
+    Tank myTank = new Tank(400,500,this);//难点！！！！！！
     Missile m = null;
+
+    List<Missile>missiles = new ArrayList<Missile>();
 
 
     private Image offScreenImage = null;
@@ -45,7 +48,10 @@ class TankClientFrame extends Frame{
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
-        if(m!=null) m.draw(g);
+        for(int i=0;i<missiles.size();i++){
+            m = missiles.get(i);
+            m.draw(g);
+        }
     }
 
 
