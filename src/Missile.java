@@ -18,7 +18,7 @@ public class Missile {
     public void draw(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.black);
-        g.fillRect(x, y, 10, 10);
+        g.fillRect(x + Tank.TWidth/3 , y +Tank.THeight/3 , 10, 10);
         g.setColor(c);
         move();
     }

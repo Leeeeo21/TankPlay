@@ -5,8 +5,9 @@ public class Tank {
     int x,y;
     TankClientFrame t = null;
     public static final double XSPEED = 5.0,YSPEED = 5.0;
+    public static final int TWidth=30,THeight=30;
     private boolean bU =false,bR =false,bD =false,bL =false;
-    Direction dirM = Direction.LU;
+    Direction dirPT = Direction.LU;
 
 
     enum Direction{U,RU,R,RD,D,LD,L,LU,STOP}
@@ -25,7 +26,38 @@ public class Tank {
     public void draw(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.blue);
-        g.fillOval(x,y,30,30);
+        g.fillOval(x,y,TWidth,THeight);
+        g.setColor(Color.black);
+
+        if(dir != Direction.STOP){
+            dirPT = dir;
+        }
+        switch (dirPT){
+            case L:
+                g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x,y+Tank.THeight/2);
+                break;
+            case LU:
+                g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x,y);
+                break;
+            case U:
+                g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x + Tank.TWidth/2,y);
+                break;
+            case RU:
+                g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x + Tank.TWidth,y);
+                break;
+            case R:
+                g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x + Tank.TWidth,y+Tank.THeight/2);
+                break;
+            case RD:
+                g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x + Tank.TWidth,y+Tank.THeight);
+                break;
+            case D:
+                g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x + Tank.TWidth/2,y+Tank.THeight);
+                break;
+            case LD:
+                g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x,y+Tank.THeight);
+                break;
+        }
         g.setColor(c);
         move();
     }
@@ -123,14 +155,7 @@ public class Tank {
 
     public Missile fire(){
         Missile m = null;
-        if (dirM == Direction.STOP) {
-            m = new Missile(x,y,dir);}
-
-
-        if(dir != Direction.STOP){
-            m = new Missile(x,y,dir);
-            dirM = dir;}
-
+            m = new Missile(x,y,dirPT);
             return m;
     }
 }
