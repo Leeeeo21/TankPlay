@@ -5,15 +5,31 @@ import java.awt.event.KeyEvent;
 
 public class Missile {
     int x, y;
-    //static boolean fire = false;
     private Tank.Direction dir;
     public static final int XSPEED = 10, YSPEED = 10;
+    TankClientFrame tc = null;
+
+    public Missile(int x, int y, Tank.Direction dir, TankClientFrame tc) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+        this.tc = tc;
+    }
+
+    public boolean isLive() {
+        return Live;
+    }
+
+
+    private boolean Live = true;
 
     public Missile(int x, int y, Tank.Direction dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
     }
+
+
 
     public void draw(Graphics g) {
         Color c = g.getColor();
@@ -54,6 +70,11 @@ public class Missile {
                 x -= XSPEED / 1.41;
                 y += YSPEED / 1.41;
                 break;
+        }
+        if(x < 0 || y < 0 || x > TankClientFrame.TANK_WIDTH || y > TankClientFrame.TANK_HEIGTHT){
+            Live = false;
+            tc.missiles.remove(this);
+           // System.out.println(this.tc.missiles.size()+"");
         }
     }
 

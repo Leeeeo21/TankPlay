@@ -29,6 +29,7 @@ public class Tank {
         g.fillOval(x,y,TWidth,THeight);
         g.setColor(Color.black);
 
+
         if(dir != Direction.STOP){
             dirPT = dir;
         }
@@ -155,7 +156,7 @@ public class Tank {
     }
 
     public Missile fire(){
-        Missile m = new Missile(x,y,dirPT);
+        Missile m = new Missile(x,y,dirPT,this.t);
             return m;
     }
 }
