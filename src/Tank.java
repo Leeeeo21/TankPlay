@@ -7,25 +7,29 @@ public class Tank {
     public static final double XSPEED = 5.0,YSPEED = 5.0;
     public static final int TWidth=30,THeight=30;
     private boolean bU =false,bR =false,bD =false,bL =false;
+    private boolean friend;
     Direction dirPT = Direction.U;
 
 
     enum Direction{U,RU,R,RD,D,LD,L,LU,STOP}
     private Direction dir = Direction.STOP;
 
-    public Tank(int x, int y ) {
+    public Tank(int x, int y ,boolean friend) {
         this.x = x;
         this.y = y;
+        this.friend = friend;
     }
-    public Tank(int x, int y ,TankClientFrame t) {
+    public Tank(int x, int y ,boolean friend,TankClientFrame t) {
         this.x = x;
         this.y = y;
         this.t = t;
+        this.friend = friend;
     }
 
     public void draw(Graphics g) {
         Color c = g.getColor();
-        g.setColor(Color.blue);
+        if (friend) g.setColor(Color.blue);
+        if (!friend) g.setColor(Color.red);
         g.fillOval(x,y,TWidth,THeight);
         g.setColor(Color.black);
 

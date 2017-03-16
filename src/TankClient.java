@@ -17,7 +17,8 @@ class TankClientFrame extends Frame{
     public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
     public static final Color BACK_GOUND_COLOR = new Color(225, 122, 76);
 
-    Tank myTank = new Tank(400,500,this);//难点！！！！！！
+    Tank myTank = new Tank(400,500,true,this);//难点！！！！！！
+    Tank enemyTank = new Tank(400,100,false,this);
     Missile m = null;
 
     List<Missile>missiles = new ArrayList<Missile>();
@@ -48,6 +49,7 @@ class TankClientFrame extends Frame{
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
+        enemyTank.draw(g);
         for(int i=0;i<missiles.size();i++){
             m = missiles.get(i);
             m.draw(g);
