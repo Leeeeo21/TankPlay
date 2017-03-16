@@ -153,7 +153,9 @@ public class Tank {
                 dir = dirs[rn];
             }
             step --;
-            this.fire();
+            if (random.nextInt(10)>8) {
+                t.missiles.add(fire());
+            }
         }
 
     }
@@ -196,14 +198,17 @@ public class Tank {
     public void keyReleased(KeyEvent e) {
         int keycode = e.getKeyCode();
         switch (keycode) {
-
-            case KeyEvent.VK_0:
+            case KeyEvent.VK_1:
+                t.myTank.setLive(true);
+                break;
+            case KeyEvent.VK_2:
                 if(sum == location.length) sum = 0;
                 t.tanks.add(new Tank(location[sum],100,false,Direction.D,t));
                 sum++;
                 System.out.println(t.tanks.size()+"");
                 break;
             case KeyEvent.VK_SPACE:
+                if(!Live) break;
                 t.missiles.add(fire());
                 break;
             case KeyEvent.VK_LEFT :
@@ -223,8 +228,9 @@ public class Tank {
     }
 
     public Missile fire(){
-        if (!Live)return null;
-        Missile m = new Missile(x,y,dirPT,friend,this.t);
+
+
+        Missile m = new Missile(x,y,dirPT,friend,t);
             return m;
     }
 

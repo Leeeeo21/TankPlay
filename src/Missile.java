@@ -42,8 +42,14 @@ public class Missile {
             return;
         }
         Color c = g.getColor();
-        g.setColor(Color.black);
+        if (friend){
+            g.setColor(Color.black);
+        }
+        if (!friend){
+            g.setColor(Color.pink);
+        }
         g.fillRect(x + Tank.TWidth/3 , y +Tank.THeight/3 , WIDTH, HEIGHT);
+
         g.setColor(c);
         move();
     }
@@ -93,9 +99,9 @@ public class Missile {
     }
 
     public boolean hitTank(Tank tank){
-        if(this.getRect().intersects(tank.getRect()) && tank.isLive()&&this.friend!=tank.isFriend()){
+        if(this.Live&&this.getRect().intersects(tank.getRect()) && tank.isLive()&&this.friend!=tank.isFriend()){
             tank.setLive(false);
-            this.Live = false;
+            Live = false;
             Explode e = new Explode(x,y,tc);
             tc.explodes.add(e);
             return  true;
