@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.*;
 
 public class Tank {
     int x,y;
@@ -10,6 +11,11 @@ public class Tank {
     private boolean friend;
     int[] location = {100,200,300,400,500,600};
     int sum = 0;
+
+    static int lifes = 0;
+
+    private static Random random = new Random();
+    private int step;
 
     public boolean isLive() {
         return Live;
@@ -30,18 +36,22 @@ public class Tank {
         this.y = y;
         this.friend = friend;
     }
-    public Tank(int x, int y ,boolean friend,TankClientFrame t) {
+    public Tank(int x, int y ,boolean friend,Direction dir,TankClientFrame t) {
         this.x = x;
         this.y = y;
         this.t = t;
         this.friend = friend;
+        this.dir = dir;
     }
 
     public void draw(Graphics g) {
         if (!Live){
             t.tanks.remove(this);
             return;
-        }       //如果坦克死亡就不画该Tank
+        }
+        /*else if(!Live){
+            t.goodTanks.remove(this);//如果坦克死亡就不画该Tank
+        }*/
 
 
         Color c = g.getColor();
@@ -85,6 +95,7 @@ public class Tank {
     }
 
     public void move(){
+
         switch (dir){
             case L:
                 x -= XSPEED;
@@ -129,6 +140,18 @@ public class Tank {
         else if (y <= (THeight-5)){
             y = THeight-5;
         }
+
+        if (!friend){
+            Direction[] dirs = Direction.values();
+            if(step == 0 ||x ==(TankClientFrame.TANK_WIDTH - TWidth)|| x == 0 ||y == (TankClientFrame.TANK_HEIGTHT - THeight )||y == (THeight-5)){
+                step = random.nextInt(40)+5;
+                int rn = random.nextInt(dirs.length);
+                dir = dirs[rn];
+            }
+            step --;
+            this.fire();
+        }
+
     }
 
 
@@ -169,9 +192,10 @@ public class Tank {
     public void keyReleased(KeyEvent e) {
         int keycode = e.getKeyCode();
         switch (keycode) {
+
             case KeyEvent.VK_0:
                 if(sum == location.length) sum = 0;
-                t.tanks.add(new Tank(location[sum],100,false,t));
+                t.tanks.add(new Tank(location[sum],100,false,Direction.D,t));
                 sum++;
                 System.out.println(t.tanks.size()+"");
                 break;
@@ -195,6 +219,7 @@ public class Tank {
     }
 
     public Missile fire(){
+        if (!Live)return null;
         Missile m = new Missile(x,y,dirPT,this.t);
             return m;
     }

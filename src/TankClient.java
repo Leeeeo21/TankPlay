@@ -17,14 +17,13 @@ class TankClientFrame extends Frame{
     public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
     public static final Color BACK_GOUND_COLOR = new Color(203, 225, 193);
 
-    Tank myTank = new Tank(400,500,true,this);//难点！！！！！！
-//    Tank enemyTank = new Tank(400,100,false,this);
-//    Explode e = new Explode(this,enemyTank);
-
+    Tank myTank = new Tank(400,500,true, Tank.Direction.STOP,this);//难点！！！！！！
 
     List<Missile>missiles = new ArrayList<Missile>();
     List<Explode>explodes = new ArrayList<Explode>();
     List<Tank>tanks = new ArrayList<Tank>();
+
+
 
 
     private Image offScreenImage = null;
@@ -47,7 +46,6 @@ class TankClientFrame extends Frame{
         pt.start();
         this.addKeyListener(new KeyMonitor());
 
-
     }
 
 
@@ -55,15 +53,16 @@ class TankClientFrame extends Frame{
     public void paint(Graphics g) {
         g.drawString("missle count: "+missiles.size(),10,50);
         g.drawString("tanks count: "+tanks.size(),10,60);
-        g.drawString("explodes count: "+explodes.size(),10,70);
+        g.drawString("explodes count: "+explodes.size(),10,90);
 
         myTank.draw(g);
-        //enemyTank.draw(g);
+
         for(int i=0;i<missiles.size();i++){
             Missile m = missiles.get(i);
             m.hitTanks(tanks);
             m.draw(g);
         }
+
         for(int i=0;i<explodes.size();i++){
             Explode e = explodes.get(i);
             e.draw(g);
@@ -109,13 +108,15 @@ class TankClientFrame extends Frame{
 
         @Override
         public void keyPressed(KeyEvent e) {
-            myTank.keyPressed(e);
+                myTank.keyPressed(e);
         }
 
 
         @Override
         public void keyReleased(KeyEvent e) {
-             myTank.keyReleased(e);
+
+                myTank.keyReleased(e);
+
         }
 
 
