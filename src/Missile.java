@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.Event.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class Missile {
     int x, y;
@@ -82,7 +83,6 @@ public class Missile {
         }
         if(x < 0-Tank.TWidth || y < 0 - Tank.THeight || x > TankClientFrame.TANK_WIDTH || y > TankClientFrame.TANK_HEIGTHT){
             Live = false;
-           // System.out.println(this.tc.missiles.size()+"");
             System.out.println(tc.missiles.size()+"");
             System.out.println(tc.tanks.size()+"");
         }
@@ -101,6 +101,12 @@ public class Missile {
             return  true;
         }
         return false;
+    }
+
+    public void hitTanks(List<Tank> tanks) {
+        for(int i=0; i<tanks.size(); i++) {
+            hitTank(tanks.get(i));
+        }
     }
 }
 
