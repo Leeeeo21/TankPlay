@@ -8,11 +8,15 @@ public class Tank {
     public static final double XSPEED = 5.0,YSPEED = 5.0;
     public static final int TWidth=30,THeight=30;
     private boolean bU =false,bR =false,bD =false,bL =false;
+
+    public boolean isFriend() {
+        return friend;
+    }
+
     private boolean friend;
+
     int[] location = {100,200,300,400,500,600};
     int sum = 0;
-
-    static int lifes = 0;
 
     private static Random random = new Random();
     private int step;
@@ -220,7 +224,7 @@ public class Tank {
 
     public Missile fire(){
         if (!Live)return null;
-        Missile m = new Missile(x,y,dirPT,this.t);
+        Missile m = new Missile(x,y,dirPT,friend,this.t);
             return m;
     }
 

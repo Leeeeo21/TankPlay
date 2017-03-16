@@ -8,15 +8,17 @@ public class Missile {
     int x, y;
     private Tank.Direction dir;
     public static final int XSPEED = 10, YSPEED = 10,WIDTH = 10,HEIGHT = 10;
+    boolean friend;
 
     TankClientFrame tc = null;
 
 
-    public Missile(int x, int y, Tank.Direction dir, TankClientFrame tc) {
+    public Missile(int x, int y, Tank.Direction dir,boolean friend, TankClientFrame tc) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tc = tc;
+        this.friend = friend;
     }
 
     public boolean isLive() {
@@ -91,7 +93,7 @@ public class Missile {
     }
 
     public boolean hitTank(Tank tank){
-        if(this.getRect().intersects(tank.getRect()) && tank.isLive()){
+        if(this.getRect().intersects(tank.getRect()) && tank.isLive()&&this.friend!=tank.isFriend()){
             tank.setLive(false);
             this.Live = false;
             Explode e = new Explode(x,y,tc);
