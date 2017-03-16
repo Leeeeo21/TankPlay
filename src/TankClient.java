@@ -15,7 +15,7 @@ public class TankClient {
 class TankClientFrame extends Frame{
 
     public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
-    public static final Color BACK_GOUND_COLOR = new Color(0,225,0);
+    public static final Color BACK_GOUND_COLOR = new Color(225, 122, 76);
 
     Tank myTank = new Tank(400,500,this);//难点！！！！！！
     Missile m = null;
@@ -77,7 +77,7 @@ class TankClientFrame extends Frame{
             while(true){
                 repaint();
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -95,7 +95,7 @@ class TankClientFrame extends Frame{
 
         @Override
         public void keyReleased(KeyEvent e) {
-            myTank.keyReleased(e);
+             myTank.keyReleased(e);
         }
 
 

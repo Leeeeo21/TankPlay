@@ -96,6 +96,18 @@ public class Tank {
             case STOP:
                 break;
         }
+        if(x>=(TankClientFrame.TANK_WIDTH - TWidth)){
+            x = TankClientFrame.TANK_WIDTH - TWidth;
+        }
+        else if(x<=0){
+            x = 0 ;
+        }
+        if(y >= (TankClientFrame.TANK_HEIGTHT - THeight)){
+            y = TankClientFrame.TANK_HEIGTHT - THeight;
+        }
+        else if (y <= (THeight-5)){
+            y = THeight-5;
+        }
     }
 
 
