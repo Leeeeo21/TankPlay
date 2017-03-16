@@ -22,7 +22,11 @@ public class Explode {
             tc.explodes.remove(this);
             return;
         }
-        if(step == diameter.length)return;
+        if(step == diameter.length){
+            step = 0;
+            Live = false;
+            return;
+        }
 
         Color c = g.getColor();
         g.setColor(color);

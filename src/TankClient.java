@@ -18,14 +18,13 @@ class TankClientFrame extends Frame{
     public static final Color BACK_GOUND_COLOR = new Color(203, 225, 193);
 
     Tank myTank = new Tank(400,500,true,this);//难点！！！！！！
-    Tank enemyTank = new Tank(400,100,false,this);
+//    Tank enemyTank = new Tank(400,100,false,this);
 //    Explode e = new Explode(this,enemyTank);
 
 
-    Explode e = null;
-
     List<Missile>missiles = new ArrayList<Missile>();
     List<Explode>explodes = new ArrayList<Explode>();
+    List<Tank>tanks = new ArrayList<Tank>();
 
 
     private Image offScreenImage = null;
@@ -47,21 +46,28 @@ class TankClientFrame extends Frame{
         Thread pt = new Thread(new PaintThread());
         pt.start();
         this.addKeyListener(new KeyMonitor());
+
+
     }
 
 
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
-        enemyTank.draw(g);
+        //enemyTank.draw(g);
         for(int i=0;i<missiles.size();i++){
             Missile m = missiles.get(i);
-            m.hitTank(enemyTank);
+            for (int a=0;a<tanks.size();a++)
+            m.hitTank(tanks.get(a));
             m.draw(g);
         }
         for(int i=0;i<explodes.size();i++){
             Explode e = explodes.get(i);
             e.draw(g);
+        }
+        for(int i=0;i<tanks.size();i++){
+            Tank t = tanks.get(i);
+            t.draw(g);
         }
     }
 

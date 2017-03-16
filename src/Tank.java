@@ -8,6 +8,8 @@ public class Tank {
     public static final int TWidth=30,THeight=30;
     private boolean bU =false,bR =false,bD =false,bL =false;
     private boolean friend;
+    int[] location = {100,200,300,400,500,600};
+    int sum = 0;
 
     public boolean isLive() {
         return Live;
@@ -36,7 +38,10 @@ public class Tank {
     }
 
     public void draw(Graphics g) {
-        if (!Live)return;       //如果坦克死亡就不画该Tank
+        if (!Live){
+            t.tanks.remove(this);
+            return;
+        }       //如果坦克死亡就不画该Tank
 
 
         Color c = g.getColor();
@@ -164,8 +169,14 @@ public class Tank {
     public void keyReleased(KeyEvent e) {
         int keycode = e.getKeyCode();
         switch (keycode) {
+            case KeyEvent.VK_0:
+                if(sum == location.length) sum = 0;
+                t.tanks.add(new Tank(location[sum],100,false,t));
+                sum++;
+                System.out.println(t.tanks.size()+"");
+                break;
             case KeyEvent.VK_SPACE:
-                    t.missiles.add(fire());
+                t.missiles.add(fire());
                 break;
             case KeyEvent.VK_LEFT :
                 bL = false;
