@@ -8,6 +8,15 @@ public class Tank {
     public static final int TWidth=30,THeight=30;
     private boolean bU =false,bR =false,bD =false,bL =false;
     private boolean friend;
+
+    public boolean isLive() {
+        return Live;
+    }
+    public void setLive(boolean live) {
+        Live = live;
+    }
+    private boolean Live = true;
+
     Direction dirPT = Direction.U;
 
 
@@ -27,6 +36,9 @@ public class Tank {
     }
 
     public void draw(Graphics g) {
+        if (!Live)return;       //如果坦克死亡就不画该Tank
+
+
         Color c = g.getColor();
         if (friend) g.setColor(Color.blue);
         if (!friend) g.setColor(Color.red);
@@ -174,5 +186,9 @@ public class Tank {
     public Missile fire(){
         Missile m = new Missile(x,y,dirPT,this.t);
             return m;
+    }
+
+    public Rectangle getRect(){
+        return  new Rectangle(x,y,TWidth,THeight);
     }
 }

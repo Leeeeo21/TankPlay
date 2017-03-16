@@ -6,8 +6,10 @@ import java.awt.event.KeyEvent;
 public class Missile {
     int x, y;
     private Tank.Direction dir;
-    public static final int XSPEED = 10, YSPEED = 10;
+    public static final int XSPEED = 10, YSPEED = 10,WIDTH = 10,HEIGHT = 10;
+
     TankClientFrame tc = null;
+
 
     public Missile(int x, int y, Tank.Direction dir, TankClientFrame tc) {
         this.x = x;
@@ -32,15 +34,22 @@ public class Missile {
 
 
     public void draw(Graphics g) {
+        if (!Live){
+            tc.missiles.remove(this);
+            return;
+        }
         Color c = g.getColor();
         g.setColor(Color.black);
-        g.fillRect(x + Tank.TWidth/3 , y +Tank.THeight/3 , 10, 10);
+        g.fillRect(x + Tank.TWidth/3 , y +Tank.THeight/3 , WIDTH, HEIGHT);
         g.setColor(c);
         move();
     }
 
 
+
+
     public void move() {
+
         switch (dir) {
             case L:
                 x -= XSPEED;
@@ -73,11 +82,22 @@ public class Missile {
         }
         if(x < 0 || y < 0 || x > TankClientFrame.TANK_WIDTH || y > TankClientFrame.TANK_HEIGTHT){
             Live = false;
-            tc.missiles.remove(this);
            // System.out.println(this.tc.missiles.size()+"");
         }
     }
 
+    public Rectangle getRect(){
+        return  new Rectangle(x,y,WIDTH,HEIGHT);
+    }
+
+    public boolean hitTank(Tank tank){
+        if(this.getRect().intersects(tank.getRect()) && tank.isLive()){
+            tank.setLive(false);
+            this.Live = false;
+            return  true;
+        }
+        return false;
+    }
 }
 
 
