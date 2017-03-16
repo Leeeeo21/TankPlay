@@ -15,13 +15,17 @@ public class TankClient {
 class TankClientFrame extends Frame{
 
     public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
-    public static final Color BACK_GOUND_COLOR = new Color(225, 122, 76);
+    public static final Color BACK_GOUND_COLOR = new Color(203, 225, 193);
 
     Tank myTank = new Tank(400,500,true,this);//难点！！！！！！
     Tank enemyTank = new Tank(400,100,false,this);
-    Missile m = null;
+//    Explode e = new Explode(this,enemyTank);
+
+
+    Explode e = null;
 
     List<Missile>missiles = new ArrayList<Missile>();
+    List<Explode>explodes = new ArrayList<Explode>();
 
 
     private Image offScreenImage = null;
@@ -51,9 +55,13 @@ class TankClientFrame extends Frame{
         myTank.draw(g);
         enemyTank.draw(g);
         for(int i=0;i<missiles.size();i++){
-            m = missiles.get(i);
+            Missile m = missiles.get(i);
             m.hitTank(enemyTank);
             m.draw(g);
+        }
+        for(int i=0;i<explodes.size();i++){
+            Explode e = explodes.get(i);
+            e.draw(g);
         }
     }
 
@@ -80,7 +88,7 @@ class TankClientFrame extends Frame{
             while(true){
                 repaint();
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -80,7 +80,7 @@ public class Missile {
                 y += YSPEED / 1.41;
                 break;
         }
-        if(x < 0 || y < 0 || x > TankClientFrame.TANK_WIDTH || y > TankClientFrame.TANK_HEIGTHT){
+        if(x < 0-Tank.TWidth || y < 0 - Tank.THeight || x > TankClientFrame.TANK_WIDTH || y > TankClientFrame.TANK_HEIGTHT){
             Live = false;
            // System.out.println(this.tc.missiles.size()+"");
         }
@@ -94,6 +94,8 @@ public class Missile {
         if(this.getRect().intersects(tank.getRect()) && tank.isLive()){
             tank.setLive(false);
             this.Live = false;
+            Explode e = new Explode(x,y,tc);
+            tc.explodes.add(e);
             return  true;
         }
         return false;
