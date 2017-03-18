@@ -22,6 +22,16 @@ public class Tank {
 
     private boolean friend;
 
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    private int life = 100;
+
     int[] location = {100,200,300,400,500,600};
     int sum = 0;
 
@@ -205,6 +215,7 @@ public class Tank {
         switch (keycode) {
             case KeyEvent.VK_1:
                 t.myTank.setLive(true);
+                setLife(100);
                 x = 400;
                 y = 500;
                 break;

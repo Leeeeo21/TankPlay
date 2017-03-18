@@ -53,7 +53,8 @@ class TankClientFrame extends Frame{
     public void paint(Graphics g) {
         g.drawString("missle count: "+missiles.size(),10,50);
         g.drawString("tanks count: "+tanks.size(),10,60);
-        g.drawString("explodes count: "+explodes.size(),10,90);
+        g.drawString("explodes count: "+myTank.getLife(),10,90);
+        g.drawString("explodes count: "+explodes.size(),10,70);
 
         myTank.draw(g);
 
@@ -100,7 +101,7 @@ class TankClientFrame extends Frame{
             while(true){
                 repaint();
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(99);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
