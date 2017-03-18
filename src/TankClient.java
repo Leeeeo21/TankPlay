@@ -70,6 +70,9 @@ class TankClientFrame extends Frame{
         }
         for(int i=0;i<tanks.size();i++){
             Tank t = tanks.get(i);
+       //     t.tankTouch(myTank);
+            t.tanksTouch(tanks);
+            t.tankTouch(myTank);
             t.draw(g);
         }
     }
