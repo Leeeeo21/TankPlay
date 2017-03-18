@@ -97,14 +97,13 @@ public class Missile {
 
     public boolean hitTank(Tank tank){
         if(this.Live&&this.getRect().intersects(tank.getRect()) && tank.isLive()&&this.friend!=tank.isFriend()){
-            if (tank.isFriend()){
+            if  (tank.getLife() <= 0){
+                tank.setLive(false);
+            }
+            else if(tank.isFriend()){
                 if (tank.getLife() > 0){
                     tank.setLife(tank.getLife()-20);
                 }
-                else {
-                    tank.setLive(false);
-                }
-
             }
             else {
                 tank.setLive(false);

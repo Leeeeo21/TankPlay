@@ -22,20 +22,21 @@ public class Tank {
 
     private boolean friend;
 
+
     public int getLife() {
         return life;
     }
-
     public void setLife(int life) {
         this.life = life;
     }
-
-    private int life = 100;
+    public final int fullLife = 99;
+    private int life = fullLife;
+    private BloodBar bb = new BloodBar();
 
     int[] location = {100,200,300,400,500,600};
     int sum = 0;
 
-    private static Random random = new Random();
+    public static Random random = new Random();
     private int step;
 
     public boolean isLive() {
@@ -72,7 +73,10 @@ public class Tank {
         }
 
         Color c = g.getColor();
-        if (friend) g.setColor(Color.blue);
+        if (friend) {
+            g.setColor(Color.blue);
+            bb.draw(g);
+        }
         if (!friend) g.setColor(Color.red);
         g.fillOval(x,y,TWidth,THeight);
         g.setColor(Color.black);
@@ -215,7 +219,7 @@ public class Tank {
         switch (keycode) {
             case KeyEvent.VK_1:
                 t.myTank.setLive(true);
-                setLife(100);
+                setLife(fullLife);
                 x = 400;
                 y = 500;
                 break;
@@ -298,5 +302,17 @@ public class Tank {
         }
         return false;
     }*/
+
+    private class BloodBar{
+        public void draw(Graphics g){
+            int w = life*TWidth/100;
+            Color c = g.getColor();
+            g.setColor(Color.yellow);
+            g.fillRect(x,y-10,TWidth,10);
+            g.setColor(Color.red);
+            g.fillRect(x,y-10,w,10);
+            g.setColor(c);
+        }
+    }
 
 }

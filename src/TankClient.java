@@ -22,6 +22,10 @@ class TankClientFrame extends Frame{
     List<Missile>missiles = new ArrayList<Missile>();
     List<Explode>explodes = new ArrayList<Explode>();
     List<Tank>tanks = new ArrayList<Tank>();
+    List<Blood>bloods = new ArrayList<Blood>();
+    Blood b = new Blood(myTank);
+
+
 
 
 
@@ -57,6 +61,9 @@ class TankClientFrame extends Frame{
         g.drawString("explodes count: "+explodes.size(),10,70);
 
         myTank.draw(g);
+
+        b.draw(g);
+        b.beEaten();
 
         for(int i=0;i<missiles.size();i++){
             Missile m = missiles.get(i);
@@ -101,7 +108,7 @@ class TankClientFrame extends Frame{
             while(true){
                 repaint();
                 try {
-                    Thread.sleep(99);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
