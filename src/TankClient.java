@@ -25,7 +25,7 @@ class TankClientFrame extends Frame{
     List<Explode>explodes = new ArrayList<Explode>();
     List<Tank>tanks = new ArrayList<Tank>();
     
-    NetClient nc = new NetClient();
+    NetClient nc = new NetClient(this);
 
 
 

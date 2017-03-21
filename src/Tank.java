@@ -6,6 +6,8 @@ import java.util.*;
 import java.util.List;
 
 public class Tank {
+	int id;
+	
     int x,y;
     TankClientFrame t = null;
     public static final double XSPEED = 5.0,YSPEED = 5.0;
@@ -61,6 +63,7 @@ public class Tank {
         if (friend) g.setColor(Color.blue);
         if (!friend) g.setColor(Color.red);
         g.fillOval(x,y,TWidth,THeight);
+        g.drawString("id:"+id, x, y-10);
         g.setColor(Color.black);
 
 
