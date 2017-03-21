@@ -4,6 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.NClob;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -23,6 +24,8 @@ class TankClientFrame extends Frame{
     List<Missile>missiles = new ArrayList<Missile>();
     List<Explode>explodes = new ArrayList<Explode>();
     List<Tank>tanks = new ArrayList<Tank>();
+    
+    NetClient nc = new NetClient();
 
 
 
@@ -46,7 +49,7 @@ class TankClientFrame extends Frame{
         Thread pt = new Thread(new PaintThread());
         pt.start();
         this.addKeyListener(new KeyMonitor());
-
+        nc.connect("127.0.0.1", TankServer.TCP_PORT);
     }
 
 

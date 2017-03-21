@@ -85,6 +85,10 @@ public class Missile {
                 x -= XSPEED / 1.41;
                 y += YSPEED / 1.41;
                 break;
+            case STOP:
+            	break;
+            default:
+            	break;
         }
         if(x < 0-Tank.TWidth || y < 0 - Tank.THeight || x > TankClientFrame.TANK_WIDTH || y > TankClientFrame.TANK_HEIGTHT){
             Live = false;
