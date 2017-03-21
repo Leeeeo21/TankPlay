@@ -12,12 +12,13 @@ public class TankClient {
         TankClientFrame t = new TankClientFrame();
     }
 }
+
 class TankClientFrame extends Frame{
 
     public static final int TANK_WIDTH = 800,TANK_HEIGTHT = 600;
     public static final Color BACK_GOUND_COLOR = new Color(203, 225, 193);
 
-    Tank myTank = new Tank(400,500,true, Tank.Direction.STOP,this);//难点！！！！！！
+    Tank myTank = new Tank(400,500,true, Dir.STOP,this);//难点！！！！！！
 
     List<Missile>missiles = new ArrayList<Missile>();
     List<Explode>explodes = new ArrayList<Explode>();
@@ -100,7 +101,7 @@ class TankClientFrame extends Frame{
             while(true){
                 repaint();
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(50); 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

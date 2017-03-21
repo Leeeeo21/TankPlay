@@ -1,7 +1,3 @@
-/**
- * 实现生成坦克的类
- *
- */
 
 
 import java.awt.*;
@@ -36,15 +32,15 @@ public class Tank {
     }
     private boolean Live = true;
 
-    Direction dirPT = Direction.U;
+    Dir dirPT = Dir.U;
 
 
-    enum Direction{U,RU,R,RD,D,LD,L,LU,STOP}
-    private Direction dir = Direction.STOP;
+    //enum Dir{U,RU,R,RD,D,LD,L,LU,STOP}
+    Dir dir = Dir.STOP;
 
     int oldX,oldY;
 
-    public Tank(int x, int y ,boolean friend,Direction dir,TankClientFrame t) {
+    public Tank(int x, int y ,boolean friend,Dir dir,TankClientFrame t) {
         this.x = x;
         this.y = y;
         this.t = t;
@@ -68,7 +64,7 @@ public class Tank {
         g.setColor(Color.black);
 
 
-        if(dir != Direction.STOP){
+        if(dir != Dir.STOP){
             dirPT = dir;
         }
         switch (dirPT){
@@ -96,6 +92,10 @@ public class Tank {
             case LD:
                 g.drawLine(x+Tank.TWidth/2,y+Tank.THeight/2,x,y+Tank.THeight);
                 break;
+            case STOP:
+            	break;
+            default:
+            	break;
         }
         g.setColor(c);
         move();
@@ -150,7 +150,7 @@ public class Tank {
         }
 
         if (!friend){
-            Direction[] dirs = Direction.values();
+            Dir[] dirs = Dir.values();
             if(step == 0 ||x ==(TankClientFrame.TANK_WIDTH - TWidth)|| x == 0 ||y == (TankClientFrame.TANK_HEIGTHT - THeight )||y == (THeight-5)){
                 step = random.nextInt(40)+5;
                 int rn = random.nextInt(dirs.length);
@@ -182,21 +182,21 @@ public class Tank {
                 bD = true;
                 break;
         }
-        locateDirection();
+        locateDir();
     }
 
 
 
-    private void locateDirection() {
-        if(bL && !bU && !bR && !bD) dir = Direction.L;
-        else if(bL && bU && !bR && !bD) dir = Direction.LU;
-        else if(!bL && bU && !bR && !bD) dir = Direction.U;
-        else if(!bL && bU && bR && !bD) dir = Direction.RU;
-        else if(!bL && !bU && bR && !bD) dir = Direction.R;
-        else if(!bL && !bU && bR && bD) dir = Direction.RD;
-        else if(!bL && !bU && !bR && bD) dir = Direction.D;
-        else if(bL && !bU && !bR && bD) dir = Direction.LD;
-        else if(!bL && !bU && !bR && !bD) dir = Direction.STOP;
+    private void locateDir() {
+        if(bL && !bU && !bR && !bD) dir = Dir.L;
+        else if(bL && bU && !bR && !bD) dir = Dir.LU;
+        else if(!bL && bU && !bR && !bD) dir = Dir.U;
+        else if(!bL && bU && bR && !bD) dir = Dir.RU;
+        else if(!bL && !bU && bR && !bD) dir = Dir.R;
+        else if(!bL && !bU && bR && bD) dir = Dir.RD;
+        else if(!bL && !bU && !bR && bD) dir = Dir.D;
+        else if(bL && !bU && !bR && bD) dir = Dir.LD;
+        else if(!bL && !bU && !bR && !bD) dir = Dir.STOP;
     }
 
     public void keyReleased(KeyEvent e) {
@@ -210,7 +210,7 @@ public class Tank {
                 break;
             case KeyEvent.VK_2:
                 if(sum == location.length) sum = 0;
-                t.tanks.add(new Tank(location[sum],100,false,Direction.R,t));
+                t.tanks.add(new Tank(location[sum],100,false,Dir.R,t));
                 sum++;
                 System.out.println(t.tanks.size()+"");
                 break;
@@ -231,7 +231,7 @@ public class Tank {
                 bD = false;
                 break;
         }
-        locateDirection();
+        locateDir();
     }
 
     public Missile fire(){

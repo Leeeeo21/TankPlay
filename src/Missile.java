@@ -3,14 +3,14 @@ import java.util.List;
 
 public class Missile {
     int x, y;
-    private Tank.Direction dir;
+    private Dir dir;
     public static final int XSPEED = 10, YSPEED = 10,WIDTH = 10,HEIGHT = 10;
     boolean friend;
 
     TankClientFrame tc = null;
 
 
-    public Missile(int x, int y, Tank.Direction dir,boolean friend, TankClientFrame tc) {
+    public Missile(int x, int y, Dir dir,boolean friend, TankClientFrame tc) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -25,7 +25,7 @@ public class Missile {
 
     private boolean Live = true;
 
-    public Missile(int x, int y, Tank.Direction dir) {
+    public Missile(int x, int y, Dir dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
