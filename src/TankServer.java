@@ -98,11 +98,6 @@ System.out.println("Server is Started at Port: "+UDP_PORT);
 				try {
 					ds.receive(dp);
 System.out.println("a Pack has been received!");
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					for(int i = 0;i < clients.size();i++){
 						Client c = clients.get(i);
 						dp.setSocketAddress(new InetSocketAddress(c.IP, c.udpport));

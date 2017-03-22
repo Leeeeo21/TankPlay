@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TankClient {
     public static void main(String[] args) {
-        TankClientFrame t = new TankClientFrame();
+        new TankClientFrame();
     }
 }
 

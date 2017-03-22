@@ -4,17 +4,16 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.nio.Buffer;
 
-import javax.xml.bind.ParseConversionEvent;
+
+
 
 
 public class NetClient {
-	private static int UDP_PORT_START = 9000;
+	private static int UDP_PORT_START = 9002;
 	private int udpport;
 	TankClientFrame tc;
 	DatagramSocket ds = null;
@@ -54,12 +53,21 @@ System.out.println("connected");
 			}
 		}
 		
-		TankMsg msg = new TankMsg(tc.myTank);
-		msg.sent(ds, "127.0.0.1", TankServer.UDP_PORT);
+		Msg msg = new TankNewMsg(tc.myTank);
+		sent(msg);
 		
 		new Thread(new UDPRecvThread()).start();
 	}
 	
+	
+	
+	void sent(Msg msg) {
+		msg.sent(ds, "127.0.0.1", TankServer.UDP_PORT);
+		
+	}
+
+
+
 	private class UDPRecvThread implements Runnable{
 
 			byte[] buf = new byte[1024];
@@ -81,9 +89,25 @@ System.out.println("a Pack has been received from server!");
 			private void parse(DatagramPacket dp) {
 				ByteArrayInputStream bais = new ByteArrayInputStream(buf);
 				DataInputStream dis = new DataInputStream(bais);
-				TankMsg msg =  new TankMsg(tc);
-				msg.parse(dis);
-				
+				int msgType = 1;
+				try {
+					msgType = dis.readInt();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				Msg msg =  null;
+				switch (msgType) {
+				case Msg.TANK_NEW_MSG:
+					msg = new TankNewMsg(tc);
+					msg.parse(dis);
+					break;
+				case Msg.TANK_MOVE_MSG:
+					msg = new TankMoveMsg(tc);
+					msg.parse(dis);
+					break;
+				default:
+					break;
+				}
 			}
 	}
 	

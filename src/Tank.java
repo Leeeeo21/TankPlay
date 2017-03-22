@@ -6,8 +6,7 @@ import java.util.*;
 import java.util.List;
 
 public class Tank {
-	int id = 0;
-	
+	int id;
     int x,y;
     TankClientFrame t = null;
     public static final double XSPEED = 5.0,YSPEED = 5.0;
@@ -191,6 +190,7 @@ public class Tank {
 
 
     private void locateDir() {
+    	Dir oldDir = dir;
         if(bL && !bU && !bR && !bD) dir = Dir.L;
         else if(bL && bU && !bR && !bD) dir = Dir.LU;
         else if(!bL && bU && !bR && !bD) dir = Dir.U;
@@ -200,6 +200,10 @@ public class Tank {
         else if(!bL && !bU && !bR && bD) dir = Dir.D;
         else if(bL && !bU && !bR && bD) dir = Dir.LD;
         else if(!bL && !bU && !bR && !bD) dir = Dir.STOP;
+        if(oldDir!= dir){
+	        TankMoveMsg msg = new TankMoveMsg(id, dir,x,y);
+			t.nc.sent(msg);
+        }
     }
 
     public void keyReleased(KeyEvent e) {
