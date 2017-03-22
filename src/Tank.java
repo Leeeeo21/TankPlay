@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.List;
 
 public class Tank {
-	int id;
+	int id = 0;
 	
     int x,y;
     TankClientFrame t = null;

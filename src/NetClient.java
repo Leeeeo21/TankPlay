@@ -81,7 +81,7 @@ System.out.println("a Pack has been received from server!");
 			private void parse(DatagramPacket dp) {
 				ByteArrayInputStream bais = new ByteArrayInputStream(buf);
 				DataInputStream dis = new DataInputStream(bais);
-				TankMsg msg =  new TankMsg();
+				TankMsg msg =  new TankMsg(tc);
 				msg.parse(dis);
 				
 			}
