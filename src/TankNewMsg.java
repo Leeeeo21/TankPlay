@@ -38,10 +38,22 @@ public class TankNewMsg implements Msg{
 			int y= dis.readInt();
 			Dir dir = Dir.values()[dis.readInt()];//根据下标取出枚举类型的值
 			boolean friend = dis.readBoolean();
+			boolean exist = false;
+			for(int i=0; i < tc.tanks.size();i ++){
+				if(id == tc.tanks.get(i).id){
+					exist = true;
+					break;
+				}
+				else break;
+			}
+			if(!exist){
+				Tank t = new Tank(x, y, friend, dir, tc);
+				t.id = id;
+				tc.tanks.add(t);
+				TankNewMsg tnMsg = new TankNewMsg(tc.myTank);
+				tc.nc.sent(tnMsg);
+			}
 			System.out.println("新生成一辆");
-			Tank t = new Tank(x, y, friend, dir, tc);
-			t.id = id;
-			tc.tanks.add(t);
 System.out.println("Send   id:" + id + "-x:" + x + "-y:" + y + "-dir:" + dir + "-good:" + friend);
 		} catch (IOException e) {
 			e.printStackTrace();

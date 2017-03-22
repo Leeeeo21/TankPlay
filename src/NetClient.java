@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 
 
 public class NetClient {
-	private static int UDP_PORT_START = 9002;
+	private static int UDP_PORT_START = 9000;
 	private int udpport;
 	TankClientFrame tc;
 	DatagramSocket ds = null;
